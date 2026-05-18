@@ -6,6 +6,7 @@ export async function apiRequest<T>(
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     const headers: HeadersInit = {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
       ...options.headers,
     };
@@ -19,25 +20,58 @@ export async function apiRequest<T>(
       headers,
     });
 
-    const data = await response.json();
+    const contentType = response.headers.get('content-type') || '';
+    let data: unknown;
+
+    if (contentType.includes('application/json')) {
+      data = await response.json();
+    } else {
+      const text = await response.text();
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = text;
+      }
+    }
 
     if (response.ok) {
-      return { success: true, data };
-    } else {
-      return { success: false, error: data.error || 'Request failed' };
+      return { success: true, data: data as T };
     }
+
+    const errorMessage =
+      typeof data === 'object' && data !== null
+        ? ((data as any).error || (data as any).message || response.statusText)
+        : String(data || response.statusText);
+
+    return { success: false, error: errorMessage };
   } catch (error) {
     console.error('API request error:', error);
     return { success: false, error: 'An error occurred' };
   }
 }
 
-export const fetcher = async (url: string) => {
+export const fetcher = async <T = any>(url: string): Promise<T> => {
   const result = await apiRequest(url);
   if (!result.success) {
     throw new Error(result.error || 'Failed to fetch');
   }
-  return result.data;
+
+  const body = result.data as any;
+
+  // Unwrap common response envelopes so callers receive useful payloads directly
+  if (body && typeof body === 'object') {
+    if (Array.isArray(body.users)) return body.users as T;
+    if (Array.isArray(body.products)) return body.products as T;
+    if (Array.isArray(body.categories)) return body.categories as T;
+    if (Array.isArray(body.vendors)) return body.vendors as T;
+    if (body.user) return body.user as T;
+    if (body.product) return body.product as T;
+    if (body.cart) return body.cart as T;
+    if (body.orders) return body.orders as T;
+    if (body.bookings) return body.bookings as T;
+  }
+
+  return body as T;
 };
 
 export const api = {

@@ -10,12 +10,12 @@ export default function VendorLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, loading } = useAuth();
+  const { user, loading, hasRole } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && (!user || user.role !== "vendor")) {
-      router.push("/login");
+    if (!loading && !hasRole('vendor')) {
+      router.replace("/login");
     }
   }, [user, loading, router]);
 
@@ -27,8 +27,15 @@ export default function VendorLayout({
     );
   }
 
-  if (!user || user.role !== "vendor") {
-    return null;
+  if (!user || !hasRole('vendor')) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-center">
+          <p className="mb-4">Access denied — redirecting to login.</p>
+          <Spinner className="mx-auto h-8 w-8" />
+        </div>
+      </div>
+    );
   }
 
   return <>{children}</>;

@@ -39,10 +39,8 @@ export default function AdminVendorsPage() {
   const [search, setSearch] = useState("");
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
-  const { data: vendors, isLoading } = useSWR<Vendor[]>(
-    "/api/admin/vendors",
-    fetcher
-  );
+  const { data, isLoading } = useSWR("/api/admin/vendors", fetcher);
+  const vendors = Array.isArray(data) ? data : [];
 
   const handleStatusUpdate = async (vendorId: string, status: string) => {
     setUpdatingId(vendorId);
@@ -90,7 +88,7 @@ export default function AdminVendorsPage() {
         (v) =>
           v.businessName.toLowerCase().includes(search.toLowerCase()) ||
           v.userId?.name?.toLowerCase().includes(search.toLowerCase()) ||
-          v.userId?.email?.toLowerCase().includes(search.toLowerCase())
+          v.userId?.email?.toLowerCase().includes(search.toLowerCase()),
       );
     }
     return filtered;
@@ -104,13 +102,15 @@ export default function AdminVendorsPage() {
     );
   }
 
-  const pendingCount = vendors?.filter((v) => v.status === "pending").length || 0;
+  const pendingCount = vendors.filter((v) => v.status === "pending").length;
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Vendor Management</h1>
+          <h1 className="text-3xl font-bold text-foreground">
+            Vendor Management
+          </h1>
           <p className="text-muted-foreground">
             Approve and manage vendor accounts
           </p>
@@ -193,7 +193,11 @@ export default function AdminVendorsPage() {
                           <TableCell>
                             <div className="flex flex-wrap gap-1">
                               {vendor.serviceAreas?.slice(0, 2).map((area) => (
-                                <Badge key={area} variant="outline" className="text-xs">
+                                <Badge
+                                  key={area}
+                                  variant="outline"
+                                  className="text-xs"
+                                >
                                   {area}
                                 </Badge>
                               ))}

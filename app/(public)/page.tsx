@@ -88,8 +88,8 @@ export default function HomePage() {
             </div>
             <div className="relative aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=600&fit=crop"
-                alt="Beautiful garden plants"
+                src="/hero-plants.jpg"
+                alt="Lush garden plants"
                 fill
                 className="object-cover"
                 priority

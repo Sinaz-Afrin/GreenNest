@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: 'GreenNest - Online Nursery & Gardening Services',
   description: 'Your one-stop destination for plants, gardening supplies, and professional gardening services. Fresh plants, expert care delivered to your door.',
   keywords: ['plants', 'gardening', 'nursery', 'garden services', 'indoor plants', 'outdoor plants', 'seeds', 'gardening tools'],
+  icons: {
+    icon: '/greennestnursery_logo.jpg',
+    shortcut: '/greennestnursery_logo.jpg',
+    apple: '/greennestnursery_logo.jpg',
+  },
 }
 
 export default function RootLayout({

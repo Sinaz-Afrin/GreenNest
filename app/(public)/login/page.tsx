@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -20,11 +20,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
 
   // Redirect if already logged in
+  useEffect(() => {
   if (user) {
-    const redirectPath = user.role === 'admin' ? '/admin/dashboard' : user.role === 'vendor' ? '/vendor/dashboard' : '/dashboard';
+    const redirectPath =
+      user.role === 'admin'
+        ? '/admin/dashboard'
+        : user.role === 'vendor'
+        ? '/vendor/dashboard'
+        : '/dashboard';
+
     router.push(redirectPath);
-    return null;
   }
+}, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

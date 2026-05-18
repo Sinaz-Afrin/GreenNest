@@ -23,11 +23,12 @@ interface AuthContextType {
   user: User | null;
   vendorProfile: VendorProfile | null;
   token: string | null;
-  isLoading: boolean;
+  loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message?: string }>;
   register: (data: RegisterData) => Promise<{ success: boolean; message?: string }>;
   logout: () => void;
   refreshUser: () => Promise<void>;
+  hasRole: (role: 'customer' | 'vendor' | 'admin' | Array<'customer' | 'vendor' | 'admin'>) => boolean;
 }
 
 interface RegisterData {
@@ -45,7 +46,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [vendorProfile, setVendorProfile] = useState<VendorProfile | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
   const router = useRouter();
 
@@ -63,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setToken(storedToken);
       fetchUser(storedToken);
     } else {
-      setIsLoading(false);
+      setLoading(false);
     }
   }, [mounted]);
 
@@ -88,7 +89,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.removeItem('token');
       setToken(null);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -162,11 +163,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         user,
         vendorProfile,
         token,
-        isLoading,
+        loading,
         login,
         register,
         logout,
         refreshUser,
+        hasRole: (role) => {
+          if (!user) return false;
+          if (Array.isArray(role)) return role.includes(user.role);
+          return user.role === role;
+        },
       }}
     >
       {children}

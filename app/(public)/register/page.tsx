@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, Suspense } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -29,11 +29,25 @@ function RegisterForm() {
     address: '',
   });
 
-  // Redirect if already logged in
-  if (user) {
-    const redirectPath = user.role === 'admin' ? '/admin/dashboard' : user.role === 'vendor' ? '/vendor/dashboard' : '/dashboard';
+  useEffect(() => {
+    if (!user) return;
+
+    const redirectPath =
+      user.role === 'admin'
+        ? '/admin/dashboard'
+        : user.role === 'vendor'
+        ? '/vendor/dashboard'
+        : '/dashboard';
+
     router.push(redirectPath);
-    return null;
+  }, [router, user]);
+
+  if (user) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <Spinner className="h-8 w-8" />
+      </div>
+    );
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
