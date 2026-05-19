@@ -89,6 +89,7 @@ Notes:
 <img width="1920" height="1080" alt="Screenshot 2026-05-19 102739" src="https://github.com/user-attachments/assets/26ff9dce-bb3c-40dc-a1ac-ae832e77a597" />
 
 - mobile view
+- home page
   <img width="461" height="754" alt="Screenshot 2026-05-19 200144" src="https://github.com/user-attachments/assets/b5e5c04b-fd5c-4c45-af0a-3487d9b06a8e" />
   <img width="457" height="743" alt="Screenshot 2026-05-19 200359" src="https://github.com/user-attachments/assets/36259b4e-e791-481f-8866-9f49aacbd0ea" />
   <img width="393" height="749" alt="Screenshot 2026-05-19 200926" src="https://github.com/user-attachments/assets/ff425b8d-cf44-4c2c-931f-a0df2203b68a" />
