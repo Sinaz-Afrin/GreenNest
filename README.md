@@ -77,29 +77,29 @@ Notes:
 
 ## Screenshots
 
-Add screenshots to `public/screenshots/` and reference them here. Example:
+- homepage hero and featured products
+<img width="1920" height="1080" alt="Screenshot 2026-05-19 101725" src="https://github.com/user-attachments/assets/6ebb9990-6c27-4a79-9067-5a4bb07660fe" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-19 101749" src="https://github.com/user-attachments/assets/c3602e3b-5151-4540-b5bd-d145634683bb" />
 
-- `public/screenshots/home.png` - homepage hero and featured products
-- `public/screenshots/product-list.png` - product listing
-- `public/screenshots/dashboard.png` - vendor/admin dashboard
+- product listing
+<img width="1920" height="1080" alt="Screenshot 2026-05-19 101908" src="https://github.com/user-attachments/assets/39a0bff3-1ff7-4fc1-8187-e05749fc2e1d" />
 
-You can embed images in this README when available:
+- vendor/admin dashboard
+<img width="1920" height="1080" alt="Screenshot 2026-05-19 103212" src="https://github.com/user-attachments/assets/e507e692-f596-4941-add9-a5be9beed6a0" />
+<img width="1920" height="1080" alt="Screenshot 2026-05-19 102739" src="https://github.com/user-attachments/assets/26ff9dce-bb3c-40dc-a1ac-ae832e77a597" />
 
-```md
-![Home](/screenshots/home.png)
-```
+- mobile view
+  <img width="461" height="754" alt="Screenshot 2026-05-19 200144" src="https://github.com/user-attachments/assets/b5e5c04b-fd5c-4c45-af0a-3487d9b06a8e" />
+  <img width="457" height="743" alt="Screenshot 2026-05-19 200359" src="https://github.com/user-attachments/assets/36259b4e-e791-481f-8866-9f49aacbd0ea" />
+  <img width="393" height="749" alt="Screenshot 2026-05-19 200926" src="https://github.com/user-attachments/assets/ff425b8d-cf44-4c2c-931f-a0df2203b68a" />
+
 
 ## Future Improvements
 
 - Add payment gateway integration for checkout
-- Improve search and filtering with server-side indexing
-- Add unit and end-to-end tests
 - Support multi-tenant vendors and onboarding flows
 - CI/CD pipelines and automated deployments
 
 ## Deployment
-
-A sample deployment link (update once deployed):
-
-https://your-greennest-app.example.com
-
+A sample deployment link:
+GreenNest – Online Nursery & Gardening Services Platform [https://greennest-marketplace.vercel.app/]
