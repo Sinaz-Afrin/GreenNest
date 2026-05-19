@@ -83,14 +83,6 @@ export default function VendorDashboardPage() {
             Welcome back, {user?.name}! Manage your products and services.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Link href="/vendor/products/new">
-            <Button>
-              <Plus className="mr-2 h-4 w-4" />
-              Add Product
-            </Button>
-          </Link>
-        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
